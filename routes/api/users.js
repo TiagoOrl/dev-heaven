@@ -1,3 +1,5 @@
+const config = require('config');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
 const express = require('express');
@@ -58,8 +60,20 @@ async (req, res) => {
         await user.save();
 
         // return JWT to be logged in afterwards
+        const payload = {
+            user: {
+                id: user.id
+            }
+        }
 
-        res.send('User registered' + user.name);
+        jwt.sign(payload, config.get('jwtSecret'), {
+            expiresIn: 36000 },
+            (err, token) => {
+                if(err) throw err;
+                
+                return res.json({ token });    // sends token as JSON through response
+            });
+
         
     } catch (error) {
         console.log(error.message);
