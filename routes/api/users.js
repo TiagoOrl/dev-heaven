@@ -31,9 +31,9 @@ async (req, res) => {
 
     try {
         // se if user exists
-        let user = await User.findOne({email});
+        let user_model = await User.findOne({email});
 
-        if (user) {
+        if (user_model) {
             return res.status(400).json({ errors: [{msg: 'User already exists' }] });
         }
 
@@ -45,7 +45,7 @@ async (req, res) => {
         });
         
         // creates the user
-        user = new User({
+        user_model = new User({
             name,
             email,
             avatar,
@@ -54,15 +54,15 @@ async (req, res) => {
 
         // encrypt password
         const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(password, salt);
+        user_model.password = await bcrypt.hash(password, salt);
 
         // commit to DB
-        await user.save();
+        await user_model.save();
 
         // return JWT to be logged in afterwards
         const payload = {
             user: {
-                id: user.id
+                id: user_model.id
             }
         }
 
