@@ -1,3 +1,4 @@
+const config = require('config');
 const request = require('request');
 const {check, validationResult} = require('express-validator/check');
 const UserProfile = require('../../models/UserProfile');
@@ -357,8 +358,21 @@ router.get('/github/:username', async (req, res) => {
         const options = {
             uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&
                     sort=created:asc&client_id=${config.get('gitHubClientId')}&
-                    client_secret=${config.get('githubClientSecret')}`
+                    client_secret=${config.get('githubClientSecret')}`,
+                    method: 'GET',
+                    headers: { 'user-agent': 'node.js' }
         }
+
+        request(options, (err, _res, _body) => {
+            if (err) console.error(err);
+
+            if (_res.statusCode !== 200)
+                return res.status(404).json({ msg: 'No github profile found' });
+            
+            return res.json(JSON.parse(_body));
+        });
+
+
     } catch (error) {
         console.error(error.message);
         return res.status(500).send('Internal error');
