@@ -61,4 +61,43 @@ router.get('/', async (req, res) => {
 });
 
 
+//@route    GET api/posts/post_id
+// @desc    get single post
+// @access  Public
+router.get('/:post_id', async (req, res) => {
+    
+    try {
+        const post = await UserPost.findOne({ _id: req.params.post_id })
+            .populate('user', ['name','email','avatar']);
+
+    if (!post) return res.status(400).json({ msg: 'Could not find post' });
+
+    return res.json(post);
+
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send('Internal error');
+    }
+});
+
+
+//@route    DELETE api/posts/:post_id
+// @desc    Deletes a post from the auth user by its post Id
+// @access  Private
+router.delete('/:post_id', authorizer, async (req, res) => {
+
+    try {
+        if (!await User.findOne({ _id: req.user.id }))
+            return res.status(400).json({ msg: 'No user found for this post' });
+        
+        await UserPost.findOneAndRemove({ _id: req.params.post_id });
+        return res.send(`Post of Id ${req.params.post_id} deleted...`);
+
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send('Internal error');
+    }
+});
+
+
 module.exports = router;
