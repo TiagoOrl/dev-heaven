@@ -70,12 +70,13 @@ router.get('/:post_id', async (req, res) => {
         const post = await UserPost.findOne({ _id: req.params.post_id })
             .populate('user', ['name','email','avatar']);
 
-    if (!post) return res.status(400).json({ msg: 'Could not find post' });
+    if (!post) return res.status(404).json({ msg: 'Could not find post' });
 
     return res.json(post);
 
     } catch (error) {
         console.error(error.message);
+        if (error.kind === 'ObjectId') return res.status(404).json({ msg: 'Could not find post' });
         return res.status(500).send('Internal error');
     }
 });
@@ -87,14 +88,23 @@ router.get('/:post_id', async (req, res) => {
 router.delete('/:post_id', authorizer, async (req, res) => {
 
     try {
-        if (!await User.findOne({ _id: req.user.id }))
-            return res.status(400).json({ msg: 'No user found for this post' });
+        
+        const post = await UserPost.findById(req.params.post_id);
+
+        if (!post) return res.status(404).json({ msg: 'Post not found' });
+
+        // compare user_id from post with id from auth to check if User owns the post
+        if (post.user_id.toString() !== req.user.id)
+            return res.status(401).json({ msg: 'User not authorized' });
+
+        
         
         await UserPost.findOneAndRemove({ _id: req.params.post_id });
         return res.send(`Post of Id ${req.params.post_id} deleted...`);
 
     } catch (error) {
         console.error(error.message);
+        if (error.kind === 'ObjectId') return res.status(404).json({ msg: 'Could not find post' });
         return res.status(500).send('Internal error');
     }
 });
