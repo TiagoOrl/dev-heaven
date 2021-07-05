@@ -1,3 +1,4 @@
+const request = require('request');
 const {check, validationResult} = require('express-validator/check');
 const UserProfile = require('../../models/UserProfile');
 const User = require('../../models/User');
@@ -297,6 +298,16 @@ async (req, res) => {
     try {
         const userProfile = await UserProfile.findOne({ user: req.user.id });
 
+        if (!userProfile)   return res.status(400).send('User not found');
+
+        const experienceItem =  UserProfile.find({ 
+            experience: { 
+               $elemMatch: { id: req.params.exp_id } 
+            }
+         }); 
+
+        if (!experienceItem) return res.status(400).send('This item does not exists');
+
         // Get remove index        
         const removeIndex = userProfile.experience.map(item => item.id).indexOf(req.params.exp_id);
         userProfile.experience.splice(removeIndex, 1);
@@ -311,7 +322,7 @@ async (req, res) => {
 
 });
 
-//@route    DELETE api/profile/experience/:edu_id
+//@route    DELETE api/profile/education/:edu_id
 // @desc    Removes a single education item from the UserProfile educations list
 // @access  Private
 router.delete('/education/:edu_id', authenticator, 
@@ -319,6 +330,8 @@ async (req, res) => {
 
     try {
         const userProfile = await UserProfile.findOne({ user: req.user.id });
+
+        if (!userProfile)   return res.status(400).send('User not found');
 
         // Get remove index        
         const removeIndex = userProfile.education.map(item => item.id).indexOf(req.params.edu_id);
@@ -332,6 +345,24 @@ async (req, res) => {
         return res.status(500).send('Internal error');
     }
 
+});
+
+
+//@route    GET api/profile/github/:username
+// @desc    Get user repos from his github account
+// @access  Public
+router.get('/github/:username', async (req, res) => {
+
+    try {
+        const options = {
+            uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&
+                    sort=created:asc&client_id=${config.get('gitHubClientId')}&
+                    client_secret=${config.get('githubClientSecret')}`
+        }
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send('Internal error');
+    }
 });
 
 module.exports = router;
