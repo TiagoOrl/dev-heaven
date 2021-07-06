@@ -299,19 +299,9 @@ async (req, res) => {
     try {
         const userProfile = await UserProfile.findOne({ user: req.user.id });
 
-        if (!userProfile)   return res.status(400).send('User not found');
-
-        const experienceItem =  UserProfile.find({ 
-            experience: { 
-               $elemMatch: { id: req.params.exp_id } 
-            }
-         }); 
-
-        if (!experienceItem) return res.status(400).send('This item does not exists');
-
-        // Get remove index        
-        const removeIndex = userProfile.experience.map(item => item.id).indexOf(req.params.exp_id);
-        userProfile.experience.splice(removeIndex, 1);
+        if (!userProfile)   return res.status(404).send('User not found');  
+        
+        userProfile.experience = userProfile.experience.filter(item => item.id !== req.params.exp_id);
         await userProfile.save();
 
         return res.json(userProfile);
@@ -332,11 +322,9 @@ async (req, res) => {
     try {
         const userProfile = await UserProfile.findOne({ user: req.user.id });
 
-        if (!userProfile)   return res.status(400).send('User not found');
+        if (!userProfile)   return res.status(404).send('User not found');
 
-        // Get remove index        
-        const removeIndex = userProfile.education.map(item => item.id).indexOf(req.params.edu_id);
-        userProfile.education.splice(removeIndex, 1);
+        userProfile.education = userProfile.education.filter(item => item.id !== req.params.edu_id);
         await userProfile.save();
 
         return res.json(userProfile);

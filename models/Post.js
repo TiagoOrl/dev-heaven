@@ -31,15 +31,19 @@ const PostSchema = new mongoose.Schema({
     ],
     comments: [
         {
-            user: {
+            user_id: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'user'
+            },
+            title: {
+                type: String,
+                required: true
             },
             text: {
                 type: String,
                 required: true
             },
-            name: {
+            username: {
                 type: String
             },
             avatar: {
