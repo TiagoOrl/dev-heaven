@@ -304,7 +304,7 @@ async (req, res) => {
         userProfile.experience = userProfile.experience.filter(item => item.id !== req.params.exp_id);
         await userProfile.save();
 
-        return res.json(userProfile);
+        return res.json(userProfile.experience);
 
     } catch (error) {
         console.error(error.message);
@@ -327,7 +327,7 @@ async (req, res) => {
         userProfile.education = userProfile.education.filter(item => item.id !== req.params.edu_id);
         await userProfile.save();
 
-        return res.json(userProfile);
+        return res.json(userProfile.education);
 
     } catch (error) {
         console.error(error.message);
