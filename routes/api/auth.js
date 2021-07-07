@@ -11,12 +11,12 @@ const router = express.Router();
 
 
 //@route    GET api/auth
-// @desc    Test route
+// @desc    get authenticated User
 // @access  Public
 router.get('/', auth, async (req, res) => {   // 2nd parameter is middleware
     
     try {
-        const user = await User.findById(req.user.id).select('-password');  // get authenticated user
+        const user = await User.findById(req.user.id).select('-password');  // get User data from Model
         return res.json(user);
     } catch (error) {
         console.log(error.message);
