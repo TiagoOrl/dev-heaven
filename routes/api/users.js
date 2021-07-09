@@ -23,10 +23,10 @@ router.get('/', auth, async (req, res) => {   // 2nd parameter is middleware
     }
 });
 
-//@route    POST api/users
+//@route    POST api/users/login
 // @desc    LOGIN user and get token
 // @access  Public
-router.post('/',[
+router.post('/login',[
     check('email', 'Please include a valid Email').isEmail(),
     check('password',' Password is required').exists()
 
@@ -81,10 +81,10 @@ async (req, res) => {
     
 });
 
-//@route    POST api/users
+//@route    POST api/users/register
 // @desc    Create user
 // @access  Public
-router.post('/',[
+router.post('/register',[
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid Email').isEmail(),
     check('password',' Please enter a password with 6 or more chars')
