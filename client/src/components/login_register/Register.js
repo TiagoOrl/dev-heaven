@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { setAlert } from '../../actions/alert'
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/register';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React from 'react';
@@ -16,10 +17,13 @@ const Register = (props) => {
     const onChange = e => { setFormData({ ...formData, [e.target.name]: e.target.value }) };
     const onSubmit = async (e) => {
         e.preventDefault();
+
         if (formData.password !== formData.password2){
             props.setAlert('Passwords do not match', 'danger');
             return;
         }
+
+        props.register(formData.name, formData.email, formData.password);
 
     }
 
@@ -34,7 +38,7 @@ const Register = (props) => {
                         placeholder="Name"
                         name="name" 
                         value={formData.name} 
-                        required
+                        // required
                         onChange={e => onChange(e)}
                     />
                 </div>
@@ -43,7 +47,7 @@ const Register = (props) => {
                         type="email" 
                         placeholder="Email Address" 
                         name="email" 
-                        required
+                        // required
                         value={formData.email}
                         onChange={e => onChange(e)}
                     />
@@ -57,8 +61,8 @@ const Register = (props) => {
                         type="password"
                         placeholder="Password"
                         name="password"
-                        minLength="6"
-                        required
+                        // minLength="6"
+                        // required
                         value={formData.password}
                         onChange={e => onChange(e)}
                     />
@@ -68,7 +72,8 @@ const Register = (props) => {
                         type="password"
                         placeholder="Confirm Password"
                         name="password2"
-                        minLength="6"
+                        // minLength="6"
+                        // required
                         value={formData.password2}
                         onChange={e => onChange(e)}
                     />
@@ -83,7 +88,8 @@ const Register = (props) => {
 }
 
 Register.propTypes = {
-    setAlert: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired
 }
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
