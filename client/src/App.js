@@ -1,15 +1,22 @@
+import getUserFromTokenAction from './actions/auth';
 import Alert from './components/layout/Alert';
 import Login from './components/login_register/Login';
 import Register from './components/login_register/Register';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
-import React,  {Fragment} from 'react';
+import React,  { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
 
+
+
 const App = () => {
+  useEffect(() => {
+    store.dispatch(getUserFromTokenAction());
+  }, []);
+
   return (
     <Provider store={store}>
       <Router>

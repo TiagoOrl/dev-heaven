@@ -1,11 +1,10 @@
-import getUserFromTokenAction  from './auth';
 import axios from 'axios';
-import { REGISTER_SUCCESS, REGISTER_FAIL } from './types';
+import { LOGIN_SUCCESS, LOGIN_FAIL } from './types';
 import { setAlert } from './alert';
+import getUserFromTokenAction  from './auth';
 
-
-// Register User
-export const register = (name, email, password) => async dispatch => {
+// Login User
+export const login = (email, password) => async dispatch => {
     
     const config = {
         headers: {
@@ -13,12 +12,12 @@ export const register = (name, email, password) => async dispatch => {
         }
     }
 
-    const body = { name, email, password };
+    const body = { email, password };
 
     try {
-        const res = await axios.post('/api/users/register', body, config);
+        const res = await axios.post('/api/users/login', body, config);
         dispatch({
-            type: REGISTER_SUCCESS,
+            type: LOGIN_SUCCESS,
             payload: res.data
         });
 
@@ -31,9 +30,6 @@ export const register = (name, email, password) => async dispatch => {
             errors.forEach(e => dispatch(setAlert(e.msg, 'danger')));
         }
 
-        dispatch({type: REGISTER_FAIL});
+        dispatch({type: LOGIN_FAIL});
     }
 }
-
-
-

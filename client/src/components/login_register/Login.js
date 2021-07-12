@@ -1,19 +1,21 @@
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { Fragment, useState } from 'react';
+import { login }  from '../../actions/login';
 
-const Login = () => {
+const Login = (props) => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
 
     const onChange = e => { setFormData({ ...formData, [e.target.name]: e.target.value }) };
+
     const onSubmit = async (e) => {
-
         e.preventDefault();
-
-
+        props.login(formData.email, formData.password);
     }
 
     return (
@@ -43,14 +45,20 @@ const Login = () => {
                         onChange={e => onChange(e)}
                     />
                 </div>
-                <input type="submit" className="btn btn-primary" value="Login" />
+                <input type="submit" className="btn btn-primary" value="Login"/>
             </form>
             <p className="my-1">
                 Don't have an account? <Link to="/register">Register</Link>
             </p>
         </Fragment>
     )
-}
+};
 
 
-export default Login;
+Login.propTypes = {
+    login: PropTypes.func.isRequired
+};
+
+
+
+export default connect(null, { login })(Login);
