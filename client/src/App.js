@@ -1,8 +1,10 @@
+import PrivateRoute from './components/routing/PrivateRoute';
 import getUserFromTokenAction from './actions/auth';
 import Alert from './components/layout/Alert';
 import Login from './components/login_register/Login';
 import Register from './components/login_register/Register';
 import Navbar from './components/layout/Navbar';
+import Dashboard from './components/dashboard/Dashboard';
 import Landing from './components/layout/Landing';
 import React,  { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -29,6 +31,7 @@ const App = () => {
             <Switch>
               <Route exact path="/register" component={Register}/>
               <Route exact path="/login" component={Login}/>
+              <PrivateRoute exact path="/dashboard" component={Dashboard}/>
             </Switch>
           </section>
         </Fragment>

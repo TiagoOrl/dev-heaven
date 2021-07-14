@@ -14,7 +14,7 @@ const Navbar = (props) => {
     const loggedLinks = (
         <ul>
             <li><Link to="/" onClick={onLogout} >Logout</Link></li>
-            <li><Link to="/register">Dashboard</Link></li>
+            <li><Link to="/dashboard">Dashboard</Link></li>
         </ul>
     );
 
