@@ -18,7 +18,8 @@ const App = () => {
   }, []);
 
   return (
-    <Provider store={store}>
+    // Provider allows Components to access the Redux store
+    <Provider store={store}>  
       <Router>
         <Fragment>
           <Navbar/>

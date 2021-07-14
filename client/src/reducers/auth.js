@@ -10,7 +10,7 @@ const initialState = {
 }
 
 
-
+// Execute a case based on the type and payload triggered by the auth REDUCER
 export default function(state = initialState, action) {
 
     switch (action.type) {
