@@ -1,5 +1,5 @@
 import PrivateRoute from './components/routing/PrivateRoute';
-import getUserFromTokenAction from './actions/auth';
+import setUserToken from './actions/auth';
 import Alert from './components/layout/Alert';
 import Login from './components/login_register/Login';
 import Register from './components/login_register/Register';
@@ -16,7 +16,7 @@ import store from './store';
 
 const App = () => {
   useEffect(() => {
-    store.dispatch(getUserFromTokenAction());
+    store.dispatch(setUserToken());
   }, []);
 
   return (

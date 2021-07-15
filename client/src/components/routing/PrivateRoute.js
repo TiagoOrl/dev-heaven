@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const PrivateRoute = props => {
     console.log(props.path);
-    if (!props.auth.isAuthenticated && !props.auth.loading) {
+    if (!props.auth.hasToken) {
         return <Redirect to='/login' />;
     } else {
         return <Route exact path={props.path} component={props.component} />

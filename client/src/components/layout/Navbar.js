@@ -13,8 +13,22 @@ const Navbar = (props) => {
 
     const loggedLinks = (
         <ul>
-            <li><Link to="/" onClick={onLogout} >Logout</Link></li>
-            <li><Link to="/dashboard">Dashboard</Link></li>
+            <li>
+                <Link to="/dashboard">
+                <i className="fas fa-user" />{' '}
+                <span className="hide-sm">
+                        Dashboard
+                    </span>
+                </Link>
+            </li>
+            <li>
+                <Link to="/" onClick={onLogout}>
+                    <i className="fas fa-sign-out-alt" />
+                    <span className="hide-sm">
+                        Logout
+                    </span>
+                </Link>
+            </li>
         </ul>
     );
 
@@ -37,7 +51,7 @@ const Navbar = (props) => {
             { 
                 !props.auth.loading ? 
                 ( <Fragment>
-                    { props.auth.isAuthenticated ? 
+                    { props.auth.hasToken ?
                         loggedLinks : 
                         guestLinks 
                     }

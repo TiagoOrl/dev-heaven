@@ -3,32 +3,32 @@ import { AUTH_SUCCESS, AUTH_FAIL } from '../actions/types';
 
 
 const initialState = {
-    token: localStorage.getItem('token'),
-    isAuthenticated: null,
+    hasToken: null,
+    token: null,
     loading: true,
     user: null
 }
 
 
-// Execute a case based on the type and payload triggered by the auth REDUCER
+// Execute a case based on the type and payload triggered by the auth ACTION
 export default function(state = initialState, action) {
 
     switch (action.type) {
+        
         case AUTH_SUCCESS: 
             return {
                 ...state,
-                token: localStorage.getItem('token'),
-                isAuthenticated: true,
+                token: action.payload.token,
+                hasToken: true,
                 loading: false,
-                user: action.payload
+                user: action.payload.usr
             };
 
         case AUTH_FAIL:
-            localStorage.removeItem('token');
             return {
                 ...state,
                 token: null,
-                isAuthenticated: false,
+                hasToken: false,
                 loading: false,
                 user: null
             };

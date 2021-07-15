@@ -57,6 +57,7 @@ router.get('/', async (req, res) => {
 router.get('/me', authenticator, async (req, res) => { // add authenticator middleware to protect API route
 
     try {
+
         // req.user.id comes from the auth token
         const userProfile = await UserProfile.findOne({ user: req.user.id  })
             .populate('user',['name', 'avatar']); // Join object references from User

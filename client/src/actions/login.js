@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { LOGIN_SUCCESS, LOGOUT, LOGIN_FAIL } from './types';
 import { setAlert } from './alert';
-import getUserFromTokenAction  from './auth';
+import setUserToken  from './auth';
 
-// Login User
+// login route return the token
 export const login = (email, password) => async dispatch => {
     
     const config = {
@@ -16,12 +16,14 @@ export const login = (email, password) => async dispatch => {
 
     try {
         const res = await axios.post('/api/users/login', body, config);
+        localStorage.setItem('token', res.data.token);
+        
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
         });
 
-        dispatch(getUserFromTokenAction());
+        dispatch(setUserToken(res.data.token));
 
     } catch (err) {
         const errors = err.response.data.errors;
@@ -30,12 +32,15 @@ export const login = (email, password) => async dispatch => {
             errors.forEach(e => dispatch(setAlert(e.msg, 'danger')));
         }
 
+        localStorage.removeItem('token');
         dispatch({type: LOGIN_FAIL});
     }
 };
 
 
 export const logout = () => dispatch => {
+    
+    localStorage.removeItem('token');
     dispatch ({
         type: LOGOUT
     });

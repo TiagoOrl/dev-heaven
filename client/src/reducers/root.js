@@ -3,10 +3,12 @@ import alert from './alert';
 import register from './register';
 import auth from "./auth";
 import login from './login';
+import profile from './profile';
 
 export default combineReducers({
     alert,
     register,
     auth,
-    login
+    login,
+    profile
 });

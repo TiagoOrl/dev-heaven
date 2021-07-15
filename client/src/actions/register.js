@@ -1,4 +1,4 @@
-import getUserFromTokenAction  from './auth';
+import setUserToken  from './auth';
 import axios from 'axios';
 import { REGISTER_SUCCESS, REGISTER_FAIL } from './types';
 import { setAlert } from './alert';
@@ -21,8 +21,8 @@ export const register = (name, email, password) => async dispatch => {
             type: REGISTER_SUCCESS,
             payload: res.data
         });
-
-        dispatch(getUserFromTokenAction());
+        localStorage.setItem('token', res.data.token);
+        dispatch(setUserToken());
 
     } catch (err) {
         const errors = err.response.data.errors;
@@ -31,6 +31,7 @@ export const register = (name, email, password) => async dispatch => {
             errors.forEach(e => dispatch(setAlert(e.msg, 'danger')));
         }
 
+        localStorage.removeItem('token');
         dispatch({type: REGISTER_FAIL});
     }
 }

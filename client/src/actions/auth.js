@@ -1,20 +1,24 @@
-import setAuthToken from '../utils/header_config';
 import axios from 'axios';
 import { AUTH_SUCCESS, AUTH_FAIL } from './types';
 
 
-// load User
-const getUserFromTokenAction = () => async dispatch => {
+// action for loading the user token, getting the user( for debugging purposes)
+const setUserToken = (token) => async dispatch => {
     
-    if (localStorage.token){
-        setAuthToken(localStorage.token);
+    if (localStorage.token) 
+        axios.defaults.headers.common['x-auth-token'] = localStorage.token;
+    else {
+        dispatch({
+            type: AUTH_FAIL
+        });
     }
 
+    
     try {
         const res = await axios.get('/api/users');
         dispatch({
             type: AUTH_SUCCESS,
-            payload: res.data
+            payload: {usr: res.data, token: token}
         });
 
     } catch (error) {
@@ -24,4 +28,4 @@ const getUserFromTokenAction = () => async dispatch => {
     }
 };
 
-export default getUserFromTokenAction;
+export default setUserToken;
