@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import React, {useEffect} from 'react';
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Dashboard = (props) => {
@@ -11,6 +12,9 @@ const Dashboard = (props) => {
     useEffect(() => {
         props.getCurrentProfile();
     }, []);
+
+    console.log(props.profile.profile);
+    
 
     if (props.auth.loading && props.profile === null)
         return <Spinner />
@@ -22,11 +26,16 @@ const Dashboard = (props) => {
                 </h1>
                 <p className="lead">
                     <i className="fas fa-user"></i>
-                    Welcome {props.auth.user && props.auth.user.name}
+                    Welcome {props.auth.user.name}
                 </p>
-                {props.profile !== null ?
-                    <Fragment>Has</Fragment> :
-                    <Fragment></Fragment>
+                {props.profile.profile !== null ?
+                    <Fragment>  Company: {props.profile.profile.company}</Fragment> :
+                    <Fragment>
+                        <p>You don't have a profile.</p>
+                        <Link to='/create-profile' className="btn btn-primary my-1">
+                            Create Profile
+                        </Link>
+                    </Fragment>
 
                 }
             </Fragment>

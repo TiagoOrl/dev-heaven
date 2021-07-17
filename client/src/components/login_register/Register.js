@@ -14,7 +14,7 @@ const Register = (props) => {
         password2: ''
     });
 
-    const onChange = e => { setFormData({ ...formData, [e.target.name]: e.target.value }) };
+    const onTypingInput = e => { setFormData({ ...formData, [e.target.name]: e.target.value }) };
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -43,7 +43,7 @@ const Register = (props) => {
                         name="name" 
                         value={formData.name} 
                         // required
-                        onChange={e => onChange(e)}
+                        onChange={e => onTypingInput(e)}
                     />
                 </div>
                 <div className="form-group">
@@ -53,7 +53,7 @@ const Register = (props) => {
                         name="email" 
                         // required
                         value={formData.email}
-                        onChange={e => onChange(e)}
+                        onChange={e => onTypingInput(e)}
                     />
                     <small className="form-text">
                         This site uses Gravatar so if you want a profile image, use a
@@ -68,7 +68,7 @@ const Register = (props) => {
                         // minLength="6"
                         // required
                         value={formData.password}
-                        onChange={e => onChange(e)}
+                        onChange={e => onTypingInput(e)}
                     />
                 </div>
                 <div className="form-group">
@@ -79,7 +79,7 @@ const Register = (props) => {
                         // minLength="6"
                         // required
                         value={formData.password2}
-                        onChange={e => onChange(e)}
+                        onChange={e => onTypingInput(e)}
                     />
                 </div>
                 <input type="submit" className="btn btn-primary" value="Register" />

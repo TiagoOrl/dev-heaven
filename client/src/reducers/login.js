@@ -3,8 +3,7 @@ import { LOGOUT, LOGIN_SUCCESS, LOGIN_FAIL } from '../actions/types';
 
 
 const initialState = {
-    loading: true,
-    user: null
+    loading: true
 }
 
 
