@@ -41,7 +41,6 @@ const Register = (props) => {
                         type="text" 
                         placeholder="Name"
                         name="name" 
-                        value={formData.name} 
                         // required
                         onChange={e => onTypingInput(e)}
                     />

@@ -1,5 +1,6 @@
 import PrivateRoute from './components/routing/PrivateRoute';
 import setUserToken from './actions/auth';
+import EditProf from './components/profile/EditProf';
 import Create from './components/profile/Create';
 import Alert from './components/layout/Alert';
 import Login from './components/login_register/Login';
@@ -34,6 +35,7 @@ const App = () => {
               <Route exact path="/login" component={Login}/>
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>
               <PrivateRoute exact path="/create-profile" component={Create} />
+              <PrivateRoute exact path="/edit-profile" component={EditProf} />
             </Switch>
           </section>
         </Fragment>

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AUTH_SUCCESS, AUTH_FAIL } from './types';
 
 
-// action for loading the user token, getting the user( for debugging purposes)
+// action for loading the user token, also sets a header token in axios
 const setUserToken = (token) => async dispatch => {
     
     if (localStorage.token) 

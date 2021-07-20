@@ -134,13 +134,13 @@ router.post('/', [authenticator,
 
     try {
         
-        let userProfileModel = await UserProfile.findOne( {user: req.user.id } );
+        let userProfileModel = await UserProfile.findOne({ user: req.user.id });
 
         if (userProfileModel){
             // update the users profile
             userProfileModel = await UserProfile.findOneAndUpdate(
-                { user: req.user.id }, { 
-                $set: profileFields}, 
+                { user: req.user.id }, 
+                { $set: profileFields }, 
                 { new: true }
                 );
 

@@ -1,3 +1,4 @@
+import Managers from './Managers';
 import Spinner from '../layout/Spinner';
 import {getCurrentProfile} from '../../actions/profile';
 import PropTypes from 'prop-types';
@@ -13,7 +14,6 @@ const Dashboard = (props) => {
         props.getCurrentProfile();
     }, []);
 
-    console.log(props.profile.profile);
     
 
     if (props.auth.loading && props.profile === null)
@@ -28,8 +28,8 @@ const Dashboard = (props) => {
                     <i className="fas fa-user"></i>
                     Welcome {props.auth.user.name}
                 </p>
-                {props.profile.profile !== null ?
-                    <Fragment>  Company: {props.profile.profile.company}</Fragment> :
+                {props.profile.data !== null ?
+                    <Fragment>  <Managers/> </Fragment> :
                     <Fragment>
                         <p>You don't have a profile.</p>
                         <Link to='/create-profile' className="btn btn-primary my-1">

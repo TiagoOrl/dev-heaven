@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
-import { createProfile } from '../../actions/profile';
-import React, { useState, Fragment } from 'react';
+import { createProfile, getCurrentProfile } from '../../actions/profile';
+import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-const Create = props => {
+const EditProf = props => {
 
     const [formData, setFormData] = useState({
         
@@ -25,6 +25,30 @@ const Create = props => {
 
     const [isSocialInToggled, toggleSocialInputs] = useState(false);
 
+    useEffect(() => {
+        props.getCurrentProfile();
+
+        console.log(props.profile.data.social);
+
+
+        setFormData({
+            company : props.profile.loading || !props.profile.data.company ? '' : props.profile.data.company,
+            website : props.profile.loading || !props.profile.data.website ? '' : props.profile.data.website,
+            location : props.profile.loading || !props.profile.data.location ? '' : props.profile.data.location,
+            status : props.profile.loading || !props.profile.data.status ? '' : props.profile.data.status,
+            skills : props.profile.loading || !props.profile.data.skills ? '' : props.profile.data.skills.join(', '),
+            githubusername : props.profile.loading || !props.profile.data.githubusername ? '' : props.profile.data.githubusername,
+            bio : props.profile.loading || !props.profile.data.bio ? '' : props.profile.data.bio,
+            twitter : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.twitter,
+            facebook : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.facebook,
+            linkedin : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.linkedin,
+            youtube : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.youtube,
+            instagram : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.instagram
+
+        });
+
+    }, [props.profile.loading]);
+
     const onSelProfStatus = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     };
@@ -32,7 +56,7 @@ const Create = props => {
     const onClickSubmit = async (e) => {
         e.preventDefault();
 
-        props.createProfile(formData, props.history);
+        props.createProfile(formData, props.history, true);
     };
 
     return (
@@ -181,10 +205,16 @@ const Create = props => {
     )
 }
 
-Create.propTypes = {
-    createProfile: PropTypes.func.isRequired
+EditProf.propTypes = {
+    createProfile: PropTypes.func.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => ({
+    profile: state.profile
+});
 
-export default connect(null, { createProfile })(Create);
+
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(EditProf);
 
