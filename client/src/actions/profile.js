@@ -111,7 +111,7 @@ export const addEducation = (formData, history) => async dispatch => {
             payload: res.data
         });
 
-        dispatch(setAlert('Experience added with success.', 'success'));
+        dispatch(setAlert('Education added with success.', 'success'));
         history.push('/dashboard');
 
     } catch (err) {

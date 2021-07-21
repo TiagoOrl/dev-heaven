@@ -1,3 +1,4 @@
+import AddEducation from './components/profile/AddEducation';
 import AddExperience from './components/profile/AddExperience';
 import PrivateRoute from './components/routing/PrivateRoute';
 import setUserToken from './actions/auth';
@@ -38,6 +39,7 @@ const App = () => {
               <PrivateRoute exact path="/create-profile" component={Create} />
               <PrivateRoute exact path="/edit-profile" component={EditProf} />
               <PrivateRoute exact path="/add-experience" component={AddExperience} />
+              <PrivateRoute exact path="/add-education" component={AddEducation} />
 
             </Switch>
           </section>
