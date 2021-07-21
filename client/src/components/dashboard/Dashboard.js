@@ -1,3 +1,5 @@
+import Educations from './Educations';
+import Experiences from './Experiences';
 import Managers from './Managers';
 import Spinner from '../layout/Spinner';
 import {getCurrentProfile} from '../../actions/profile';
@@ -29,7 +31,11 @@ const Dashboard = (props) => {
                     Welcome {props.auth.user.name}
                 </p>
                 {props.profile.data !== null ?
-                    <Fragment>  <Managers/> </Fragment> :
+                    <Fragment>  
+                        <Managers/> 
+                        <Experiences experiences={props.profile.data.experience} />
+                        <Educations educations={props.profile.data.education} />
+                    </Fragment> :
                     <Fragment>
                         <p>You don't have a profile.</p>
                         <Link to='/create-profile' className="btn btn-primary my-1">

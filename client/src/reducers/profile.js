@@ -1,7 +1,7 @@
 import {GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, UPDATE_PROFILE_ERROR} from '../actions/types';
 
 const initialState = {
-    profile: null,
+    data: null,
     profiles: [],
     repos: [],
     loading: true,
