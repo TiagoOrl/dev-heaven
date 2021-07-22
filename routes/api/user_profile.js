@@ -3,6 +3,7 @@ const request = require('request');
 const {check, validationResult} = require('express-validator/check');
 const UserProfile = require('../../models/UserProfile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 const authenticator = require('../../middleware/jwt_auth');
 const express = require('express');
 const router = express.Router();
@@ -167,7 +168,8 @@ router.post('/', [authenticator,
 router.delete('/', authenticator, async (req, res) => {
     try {
         
-        // @todo - remove users posts
+        // remove users posts
+        await Post.deleteMany({ user: req.user.id });
 
         // remove profile and user by token payload (user: id)
         await UserProfile.findOneAndRemove({ user: req.user.id });

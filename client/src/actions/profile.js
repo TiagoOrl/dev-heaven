@@ -161,6 +161,7 @@ export const deleteEducation = (id) => async dispatch => {
             payload: res.data
         });
         dispatch(setAlert('Education removed.', 'success'));
+        dispatch(getCurrentProfile());
 
     } catch (error) {
 
