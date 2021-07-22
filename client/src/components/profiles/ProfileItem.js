@@ -28,7 +28,7 @@ const ProfileItem = props => {
                 <Link to={`/profile/${props.profile.user._id}`} 
                     className="btn btn-primary">
                         View Profile
-                    </Link>
+                </Link>
             </div>
 
             <ul>
