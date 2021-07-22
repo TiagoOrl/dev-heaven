@@ -1,4 +1,4 @@
-import { AUTH_SUCCESS, AUTH_FAIL } from '../actions/types';
+import { AUTH_SUCCESS, AUTH_FAIL, DELETE_ACCOUNT } from '../actions/types';
 
 
 
@@ -24,6 +24,7 @@ export default function(state = initialState, action) {
                 user: action.payload.usr
             };
 
+        case DELETE_ACCOUNT:
         case AUTH_FAIL:
             return {
                 ...state,
@@ -32,6 +33,8 @@ export default function(state = initialState, action) {
                 loading: false,
                 user: null
             };
+
+        
 
         default:
             return state;

@@ -17,10 +17,7 @@ const Dashboard = (props) => {
     }, []);
 
     
-
-    if (props.auth.loading && props.profile === null)
-        return <Spinner />
-    else    
+ 
         return (
             <Fragment>
                 <h1 className="large text-primary">
@@ -33,8 +30,8 @@ const Dashboard = (props) => {
                 {props.profile.data !== null ?
                     <Fragment>  
                         <Managers/> 
-                        <Experiences experiences={props.profile.data.experience} />
-                        <Educations educations={props.profile.data.education} />
+                        <Experiences experience_list={props.profile.data.experience} />
+                        <Educations education_list={props.profile.data.education} />
                     </Fragment> :
                     <Fragment>
                         <p>You don't have a profile.</p>

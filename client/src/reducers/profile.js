@@ -5,6 +5,7 @@ const initialState = {
     profiles: [],
     repos: [],
     loading: true,
+    msg: null,
     error: {}
 };
 
@@ -13,8 +14,14 @@ const initialState = {
 export default function(state = initialState, action) {
     
     switch (action.type) {
-        case GET_PROFILE:
+
         case UPDATE_PROFILE:
+            return {
+                ...state,
+                msg: action.payload,
+                loading: false
+            };
+        case GET_PROFILE:
             return {
                 ...state,
                 data: action.payload,

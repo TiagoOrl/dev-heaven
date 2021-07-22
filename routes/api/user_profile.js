@@ -308,7 +308,7 @@ async (req, res) => {
         userProfile.experience = userProfile.experience.filter(item => item.id !== req.params.exp_id);
         await userProfile.save();
 
-        return res.json(userProfile.experience);
+        return res.send("Experience removed.");
 
     } catch (error) {
         console.error(error.message);
@@ -331,7 +331,7 @@ async (req, res) => {
         userProfile.education = userProfile.education.filter(item => item.id !== req.params.edu_id);
         await userProfile.save();
 
-        return res.json(userProfile.education);
+        return res.send("Education removed");
 
     } catch (error) {
         console.error(error.message);
