@@ -14,6 +14,11 @@ const Navbar = (props) => {
     const loggedLinks = (
         <ul>
             <li>
+                <Link to="/all-profiles">
+                        Developers
+                </Link>
+            </li>
+            <li>
                 <Link to="/dashboard">
                 <i className="fas fa-user" />{' '}
                 <span className="hide-sm">
@@ -34,7 +39,7 @@ const Navbar = (props) => {
 
     const guestLinks = (
         <ul>
-            <li><Link to="/">Developers</Link></li>
+            <li><Link to="/all-profiles">Developers</Link></li>
             <li><Link to="/register">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
         </ul>

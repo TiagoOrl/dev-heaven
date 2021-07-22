@@ -1,4 +1,5 @@
-import {GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, UPDATE_PROFILE_ERROR} from '../actions/types';
+import {GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, GET_ALL_PROFILES, 
+        UPDATE_PROFILE_ERROR, CLEAR_PROFILE, GET_REPOS } from '../actions/types';
 
 const initialState = {
     data: null,
@@ -27,13 +28,37 @@ export default function(state = initialState, action) {
                 data: action.payload,
                 loading: false
             };
+
+        case GET_ALL_PROFILES:
+            return {
+                ...state,
+                profiles: action.payload,
+                msg: "Queried all profiles",
+                loading: false
+            };
+        
+        case GET_REPOS:
+            return {
+                ...state,
+                repos: action.payload,
+                msg: "Queried github repository",
+                loading: false
+            };
+
         
         case PROFILE_ERROR:
         case UPDATE_PROFILE_ERROR:
             return {
                 ...state,
-                error: action.payload,
+                msg: action.payload,
                 loading: false
+            };
+
+        case CLEAR_PROFILE:
+            return {
+                ...state,
+                data: null,
+                msg: "Cleared current user profile from the state"
             };
 
         default:
