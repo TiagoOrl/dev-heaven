@@ -47,7 +47,7 @@ const EditProf = props => {
 
         });
 
-    }, [props.profile.loading]);
+    }, []);
 
     const onSelProfStatus = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});

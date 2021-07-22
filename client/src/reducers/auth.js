@@ -6,12 +6,11 @@ const initialState = {
     hasToken: null,
     token: null,
     loading: true,
-    user: null
+    user: null,
+    msg: null
 }
 
-
-// Execute a case based on the type and payload triggered by the auth ACTION
-export default function(state = initialState, action) {
+export default function auth(state = initialState, action) {
 
     switch (action.type) {
         
@@ -31,7 +30,8 @@ export default function(state = initialState, action) {
                 token: null,
                 hasToken: false,
                 loading: false,
-                user: null
+                user: null,
+                msg: action.payload
             };
 
         

@@ -110,7 +110,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
 
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error.response, status: error.response.status }
+            payload: { msg: error }
         });
     }
 
@@ -145,7 +145,7 @@ export const addExperience = (formData, history) => async dispatch => {
 
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error.response, status: error.response.status }
+            payload: { msg: error }
         });
     }
 };
@@ -178,7 +178,7 @@ export const addEducation = (formData, history) => async dispatch => {
 
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error.response, status: error.response.status }
+            payload: { msg: error }
         });
     }
 };
@@ -226,7 +226,7 @@ export const deleteEducation = (id) => async dispatch => {
 
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error.response }
+            payload: { msg: error }
         });
     }
 }
@@ -241,7 +241,9 @@ export const deleteAccount = () => async dispatch => {
     try {
         const res = await axios.delete(`/api/profile/`);
 
-        dispatch({type: DELETE_ACCOUNT});
+        dispatch({
+            type: DELETE_ACCOUNT,
+            payload: res.data});
 
         dispatch({
             type: CLEAR_PROFILE
@@ -250,14 +252,9 @@ export const deleteAccount = () => async dispatch => {
         dispatch(setAlert('Account deleted permanently.', 'success'));
     } catch (error) {
 
-        const errors = error.response.data.errors;
-
-        if (errors)
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error.response, status: error.response.status }
+            payload: { msg: error }
         });
     }
 }

@@ -119,7 +119,6 @@ router.post('/', [authenticator,
     
     if (skills) {
         profileFields.skills = skills.split(',').map(skill => skill.trim());
-        console.log(profileFields.skills);
     }
 
     

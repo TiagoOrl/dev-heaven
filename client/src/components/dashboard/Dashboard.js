@@ -1,7 +1,7 @@
 import Educations from './Educations';
 import Experiences from './Experiences';
 import Managers from './Managers';
-import Spinner from '../layout/Spinner';
+// import Spinner from '../layout/Spinner';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,7 +16,6 @@ const Dashboard = (props) => {
         props.getCurrentProfile();
     }, []);
 
-    
  
         return (
             <Fragment>
