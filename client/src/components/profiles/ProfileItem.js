@@ -25,7 +25,7 @@ const ProfileItem = props => {
                             <span>{props.profile.location}</span>
                         }
                 </p>
-                <Link to={`/profile/${props.profile.user._id}`} 
+                <Link to={`/full-profile/${props.profile.user._id}`} 
                     className="btn btn-primary">
                         View Profile
                 </Link>

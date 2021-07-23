@@ -1,15 +1,16 @@
+import FullProfile from './components/profiles/FullProfile';
 import Profiles from './components/profiles/Profiles';
-import AddEducation from './components/dashboard/AddEducation';
-import AddExperience from './components/dashboard/AddExperience';
+import AddEducation from './components/user_dashboard/AddEducation';
+import AddExperience from './components/user_dashboard/AddExperience';
 import PrivateRoute from './components/routing/PrivateRoute';
 import setUserToken from './actions/auth';
-import EditProf from './components/dashboard/EditProf';
-import Create from './components/dashboard/Create';
+import EditProf from './components/user_dashboard/EditProf';
+import Create from './components/user_dashboard/Create';
 import Alert from './components/layout/Alert';
 import Login from './components/login_register/Login';
 import Register from './components/login_register/Register';
 import Navbar from './components/layout/Navbar';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard from './components/user_dashboard/Dashboard';
 import Landing from './components/layout/Landing';
 import React,  { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -37,6 +38,7 @@ const App = () => {
               <Route exact path="/register" component={Register}/>
               <Route exact path="/login" component={Login}/>
               <Route exact path="/all-profiles" component={Profiles}/>
+              <Route exact path="/full-profile/:id" component={FullProfile}/>
               
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>
               <PrivateRoute exact path="/create-profile" component={Create} />
