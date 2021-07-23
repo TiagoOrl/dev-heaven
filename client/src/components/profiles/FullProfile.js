@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Spinner } from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
+import ProfileTop from './ProfileTop';
 
 const FullProfile = props => {
 
@@ -14,13 +15,19 @@ const FullProfile = props => {
     return (
         <Fragment>
 
-            {props.profile.loading ? 
+            {props.profile.data === null ?
                 <Spinner/> :
                 <Fragment>
-                    {JSON.stringify(props.profile.data)}
                     <Link className="btn btn-light" to="/all-profiles">Go Back</Link>
-                    {props.auth.hasToken && props.auth.user._id === props.match.params.id && 
-                        (<Link to="/edit-profile" className="btn btn-dark">Edit Profile</Link>)}
+                    {props.auth.hasToken && props.auth.user._id === props.match.params.id &&  (
+                    <Link to="/edit-profile" className="btn btn-dark">
+                        Edit Profile
+                    </Link>
+                    )}
+                    
+                    <div className="profile-grid my-1">
+                        <ProfileTop profile={props.profile.data} />
+                    </div>
                 </Fragment>
             }
         </Fragment>

@@ -10,13 +10,12 @@ const Profiles = props => {
     useEffect(() => {
         props.getAllProfiles();
 
-
     }, []);
 
     return (
         <Fragment>
         {
-            props.profile.profiles.loading ? 
+            props.profile.profiles === null ? 
                 <Spinner/> :
                 <Fragment> 
                     <h1 className="large text-primary">
