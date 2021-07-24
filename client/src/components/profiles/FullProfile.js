@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {Spinner } from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
 
 const FullProfile = props => {
 
@@ -27,6 +28,7 @@ const FullProfile = props => {
                     
                     <div className="profile-grid my-1">
                         <ProfileTop profile={props.profile.data} />
+                        <ProfileAbout profile={props.profile.data} />
                     </div>
                 </Fragment>
             }
