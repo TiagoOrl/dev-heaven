@@ -13,7 +13,7 @@ const EditProf = props => {
         location: '',
         status: '',
         skills: '',
-        githubusername: '',
+        github_username: '',
         bio: '',
         twitter: '',
         facebook: '',
@@ -37,7 +37,7 @@ const EditProf = props => {
             location : props.profile.loading || !props.profile.data.location ? '' : props.profile.data.location,
             status : props.profile.loading || !props.profile.data.status ? '' : props.profile.data.status,
             skills : props.profile.loading || !props.profile.data.skills ? '' : props.profile.data.skills.join(', '),
-            githubusername : props.profile.loading || !props.profile.data.githubusername ? '' : props.profile.data.githubusername,
+            github_username : props.profile.loading || !props.profile.data.githubusername ? '' : props.profile.data.githubusername,
             bio : props.profile.loading || !props.profile.data.bio ? '' : props.profile.data.bio,
             twitter : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.twitter,
             facebook : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.facebook,
@@ -128,7 +128,7 @@ const EditProf = props => {
                     type="text"
                     placeholder="Github Username"
                     name="githubusername"
-                    value={formData.githubusername} 
+                    value={formData.github_username} 
                     onChange={e => onSelProfStatus(e)}  
                 />
                 <small className="form-text"

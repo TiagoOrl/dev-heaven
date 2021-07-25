@@ -6,6 +6,9 @@ import {Spinner } from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
+import ProfileExperience from './ProfileExperience';
+import ProfileEducation from './ProfileEducation';
+import ProfileGithubRepos from './ProfileGithubRepos';
 
 const FullProfile = props => {
 
@@ -29,6 +32,34 @@ const FullProfile = props => {
                     <div className="profile-grid my-1">
                         <ProfileTop profile={props.profile.data} />
                         <ProfileAbout profile={props.profile.data} />
+
+                        <div className="profile-exp bg-white p-2">
+                            <h2 className="text-primary">Experience</h2>
+                            {props.profile.data.experience.length > 0 ? 
+                            (
+                                <Fragment>
+                                    {props.profile.data.experience.map(item => (
+                                        <ProfileExperience key={item._id} experience={item} />
+                                    ))}
+                                </Fragment>) :
+                            (<h4>No experience found</h4>)}
+                        </div>
+                        <div className="profile-edu bg-white p-2">
+                            <h2 className="text-primary">Education</h2>
+                            {props.profile.data.education.length > 0 ? 
+                            (
+                                <Fragment>
+                                    {props.profile.data.education.map(item => (
+                                        <ProfileEducation key={item._id} education={item} />
+                                    ))}
+                                </Fragment>) : 
+                                
+                                (<h4>No education found</h4>)   }
+                        </div>
+
+                        {props.profile.data.github_username && (
+                            <ProfileGithubRepos  username={props.profile.data.github_username} />
+                        )}
                     </div>
                 </Fragment>
             }
