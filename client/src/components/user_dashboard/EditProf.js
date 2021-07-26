@@ -32,18 +32,18 @@ const EditProf = props => {
 
 
         setFormData({
-            company : props.profile.loading || !props.profile.data.company ? '' : props.profile.data.company,
-            website : props.profile.loading || !props.profile.data.website ? '' : props.profile.data.website,
-            location : props.profile.loading || !props.profile.data.location ? '' : props.profile.data.location,
-            status : props.profile.loading || !props.profile.data.status ? '' : props.profile.data.status,
-            skills : props.profile.loading || !props.profile.data.skills ? '' : props.profile.data.skills.join(', '),
-            github_username : props.profile.loading || !props.profile.data.githubusername ? '' : props.profile.data.githubusername,
-            bio : props.profile.loading || !props.profile.data.bio ? '' : props.profile.data.bio,
-            twitter : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.twitter,
-            facebook : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.facebook,
-            linkedin : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.linkedin,
-            youtube : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.youtube,
-            instagram : props.profile.loading || !props.profile.data.social ? '' : props.profile.data.social.instagram
+            company : !props.profile.data.company ? '' : props.profile.data.company,
+            website : !props.profile.data.website ? '' : props.profile.data.website,
+            location : !props.profile.data.location ? '' : props.profile.data.location,
+            status : !props.profile.data.status ? '' : props.profile.data.status,
+            skills : !props.profile.data.skills ? '' : props.profile.data.skills.join(', '),
+            github_username : !props.profile.data.github_username ? '' : props.profile.data.github_username,
+            bio : !props.profile.data.bio ? '' : props.profile.data.bio,
+            twitter : !props.profile.data.social ? '' : props.profile.data.social.twitter,
+            facebook : !props.profile.data.social ? '' : props.profile.data.social.facebook,
+            linkedin : !props.profile.data.social ? '' : props.profile.data.social.linkedin,
+            youtube : !props.profile.data.social ? '' : props.profile.data.social.youtube,
+            instagram : !props.profile.data.social ? '' : props.profile.data.social.instagram
 
         });
 
@@ -127,14 +127,16 @@ const EditProf = props => {
                 <input
                     type="text"
                     placeholder="Github Username"
-                    name="githubusername"
+                    name="github_username"
                     value={formData.github_username} 
-                    onChange={e => onSelProfStatus(e)}  
+                    onChange={e => onSelProfStatus(e)}
                 />
+
                 <small className="form-text"
                     >If you want your latest repos and a Github link, include your
-                    username</small
-                >
+                    username
+                </small>
+
                 </div>
                 <div className="form-group">
                 <textarea placeholder="A short bio of yourself" name="bio"
