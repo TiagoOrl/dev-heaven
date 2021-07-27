@@ -18,8 +18,7 @@ export const getCurrentProfile = () => async dispatch => {
     } catch (error) {
         dispatch({
             type: PROFILE_ERROR,
-            payload: { msg: error, 
-                status: error }
+            payload: error
         });
     }
 };
@@ -38,7 +37,7 @@ export const getAllProfiles = () => async dispatch => {
     } catch (error) {
         dispatch({
             type: PROFILE_ERROR,
-            payload: { msg: error }
+            payload: error
         });
     }
 };
@@ -56,7 +55,7 @@ export const getProfileById = (userId) => async dispatch => {
     } catch (error) {
         dispatch({
             type: PROFILE_ERROR,
-            payload: { msg: error }
+            payload: error
         });
     }
 };
@@ -74,7 +73,7 @@ export const getGithubRepos = (githubUsrName) => async dispatch => {
     } catch (error) {
         dispatch({
             type: PROFILE_ERROR,
-            payload: { msg: error }
+            payload: error
         });
     }
 };
@@ -110,7 +109,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
 
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error }
+            payload: error
         });
     }
 
@@ -145,7 +144,7 @@ export const addExperience = (formData, history) => async dispatch => {
 
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error }
+            payload: error
         });
     }
 };
@@ -178,7 +177,7 @@ export const addEducation = (formData, history) => async dispatch => {
 
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error }
+            payload: error
         });
     }
 };
@@ -226,7 +225,7 @@ export const deleteEducation = (id) => async dispatch => {
 
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error }
+            payload: error
         });
     }
 }
@@ -254,7 +253,7 @@ export const deleteAccount = () => async dispatch => {
 
         dispatch({
             type: UPDATE_PROFILE_ERROR,
-            payload: { msg: error }
+            payload: error
         });
     }
 }

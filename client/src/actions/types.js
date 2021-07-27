@@ -15,3 +15,8 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 export const GET_REPOS = 'GET_REPOS';
+
+export const GET_ALL_POSTS = 'GET_ALL_POSTS';
+export const GET_FULL_POST = 'GET_FULL_POST';
+export const REMOVE_POST = 'REMOVE_POST';
+export const POST_ERROR = 'POST_ERROR';
