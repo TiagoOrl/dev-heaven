@@ -38,11 +38,11 @@ const PostItem = (props) => {
                 Posted on {' '}
                 <Moment format="DD/MM/YYYY">{props.item.date}</Moment>
             </p>
-            <button onClick={e => props.addLike(props.item._id)} type="button" className="btn btn-light">
+            <button onClick={e => { props.addLike(props.item._id)} } type="button" className="btn btn-light">
               <i className="fas fa-thumbs-up"></i>{' '}
               <span>{props.item.likes.length}</span>
             </button>
-            <button onClick={e => props.removeLike(props.item._id)} type="button" className="btn btn-light">
+            <button onClick={e => { props.removeLike(props.item._id)} } type="button" className="btn btn-light">
               <i className="fas fa-thumbs-down"></i>
             </button>
             <Link to={`/full-item`} className="btn btn-primary">

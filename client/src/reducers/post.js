@@ -43,7 +43,8 @@ export default function post(state = initialState, action) {
         case UPDATE_LIKES:
             return {
                 ...state,
-                all_posts: action.payload
+                all_posts: action.payload.res,
+                msg: action.payload.msg
             };
 
         default:

@@ -52,8 +52,10 @@ export const addLike = (post_id) => async dispatch => {
 
         dispatch({
             type: UPDATE_LIKES,
-            payload: res.data
+            payload: {res: res.data, msg: 'Added Like'}
         });
+
+        dispatch(getAllPosts());
 
     } catch (error) {
 
@@ -72,8 +74,10 @@ export const removeLike = (post_id) => async dispatch => {
 
         dispatch({
             type: UPDATE_LIKES,
-            payload: res.data
+            payload: {res: res.data, msg: 'Removed Like'}
         });
+
+        dispatch(getAllPosts());
 
     } catch (error) {
 
