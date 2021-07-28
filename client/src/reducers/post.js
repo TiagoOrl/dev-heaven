@@ -1,4 +1,5 @@
-import { GET_ALL_POSTS, GET_FULL_POST, DELETE_POST, POST_ERROR, 
+import { GET_ALL_POSTS, GET_FULL_POST, ADD_POST,
+             DELETE_POST, POST_ERROR, 
             UPDATE_LIKES } from '../actions/types';
 
 
@@ -26,6 +27,11 @@ export default function post(state = initialState, action) {
                 full_post: action.payload,
                 msg: 'Full post obtained'
             }
+        case ADD_POST:
+            return {
+                ...state,
+                msg: action.paylaod
+            };
 
         case DELETE_POST:
             return {

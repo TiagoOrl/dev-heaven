@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getAllPosts } from '../../actions/post';
 import PostItem from './PostItem';
+import PostForm from './PostForm';
 
 const Posts = props => {
 
@@ -23,6 +24,8 @@ const Posts = props => {
                             </i> 
                             See the latest posts
                         </p>
+
+                        <PostForm />
 
                         <div className="posts">
                             {props.post.all_posts.map((post_item) => (

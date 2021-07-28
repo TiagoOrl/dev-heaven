@@ -32,7 +32,7 @@ router.post('/', authorizer, [
 
         let userPostModel = new UserPost(newPost);
         await userPostModel.save();
-        return res.json(userPostModel);
+        return res.send(`New post of title ${newPost.title} has been created`);
 
     } catch (error) {
         console.error(error.message);

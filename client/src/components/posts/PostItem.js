@@ -22,7 +22,7 @@ const PostItem = (props) => {
     return (
         <div className="post bg-white p-1 my-1">
           <div>
-            <Link to={`/full-profile/${props.item._id}`}>
+            <Link to={`/full-profile/${props.item.user_id}`}>
               <img
                 className="round-img"
                 src={props.item.avatar}
