@@ -1,3 +1,4 @@
+import Posts from './components/posts/Posts';
 import FullProfile from './components/profiles/FullProfile';
 import Profiles from './components/profiles/Profiles';
 import AddEducation from './components/user_dashboard/AddEducation';
@@ -39,6 +40,8 @@ const App = () => {
               <Route exact path="/login" component={Login}/>
               <Route exact path="/all-profiles" component={Profiles}/>
               <Route exact path="/full-profile/:id" component={FullProfile}/>
+              <Route exact path="/all-posts" component={Posts} />
+              {/* <Route exact path="/full-post" component={} /> */}
               
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>
               <PrivateRoute exact path="/create-profile" component={Create} />

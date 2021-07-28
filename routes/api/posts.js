@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
 });
 
 
-//@route    GET api/posts/post_id
+//@route    GET api/posts/:post_id
 // @desc    get single post
 // @access  Public
 router.get('/:post_id', async (req, res) => {

@@ -14,6 +14,11 @@ const Navbar = (props) => {
     const loggedLinks = (
         <ul>
             <li>
+                <Link to="/all-posts">
+                    Posts
+                </Link>
+            </li>
+            <li>
                 <Link to="/all-profiles">
                         Developers
                 </Link>
@@ -39,6 +44,7 @@ const Navbar = (props) => {
 
     const guestLinks = (
         <ul>
+            <li><Link to="/all-posts">Posts</Link></li>
             <li><Link to="/all-profiles">Developers</Link></li>
             <li><Link to="/register">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
