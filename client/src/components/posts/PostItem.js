@@ -46,7 +46,7 @@ const PostItem = (props) => {
             <button onClick={e => { props.removeLike(props.item._id)} } type="button" className="btn btn-light">
               <i className="fas fa-thumbs-down"></i>
             </button>
-            <Link to={`/full-item`} className="btn btn-primary">
+            <Link to={`/full-post/${props.item._id}`} className="btn btn-primary">
               Comments <span className='comment-count'>{props.item.comments.length}</span>
             </Link>
             {deleteBtn}

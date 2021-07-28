@@ -1,3 +1,4 @@
+import Post from './components/full_post/Post';
 import Posts from './components/posts/Posts';
 import FullProfile from './components/profiles/FullProfile';
 import Profiles from './components/profiles/Profiles';
@@ -41,7 +42,7 @@ const App = () => {
               <Route exact path="/all-profiles" component={Profiles}/>
               <Route exact path="/full-profile/:id" component={FullProfile}/>
               <Route exact path="/all-posts" component={Posts} />
-              {/* <Route exact path="/full-post" component={} /> */}
+              <Route exact path="/full-post/:post_id" component={Post} />
               
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>
               <PrivateRoute exact path="/create-profile" component={Create} />
