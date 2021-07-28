@@ -1,7 +1,7 @@
 import { setAlert } from './alert';
 import axios from 'axios';
 import { GET_ALL_POSTS, GET_FULL_POST, REMOVE_POST, 
-            POST_ERROR } from './types';
+            POST_ERROR, UPDATE_LIKES } from './types';
 
 
 
@@ -32,6 +32,46 @@ export const getFullPost = (post_id) => async dispatch => {
 
         dispatch({
             type: GET_FULL_POST,
+            payload: res.data
+        });
+
+    } catch (error) {
+
+        dispatch({
+            type: POST_ERROR,
+            payload: error
+        })
+    }
+}
+
+
+export const addLike = (post_id) => async dispatch => {
+
+    try {
+        const res = await axios.put(`/api/posts/like/${post_id}`);
+
+        dispatch({
+            type: UPDATE_LIKES,
+            payload: res.data
+        });
+
+    } catch (error) {
+
+        dispatch({
+            type: POST_ERROR,
+            payload: error
+        })
+    }
+}
+
+
+export const removeLike = (post_id) => async dispatch => {
+
+    try {
+        const res = await axios.put(`/api/posts/unlike/${post_id}`);
+
+        dispatch({
+            type: UPDATE_LIKES,
             payload: res.data
         });
 

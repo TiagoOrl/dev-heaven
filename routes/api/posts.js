@@ -116,19 +116,21 @@ router.delete('/:post_id', authorizer, async (req, res) => {
 router.put('/like/:post_id', authorizer, async (req, res) => {
 
     try {
-        
+        const allPosts = await UserPost.find()
+            .populate('user', ['name','email','avatar']);
         const post = await UserPost.findById(req.params.post_id);
-        if (!post) return res.status(404).json({ msg: 'Post not found' });
+        if (!post) return res.status(404).send('Post not found');
 
 
         // check if post already has a like from this user
         if (post.likes.find( like => like.user.toString() === req.user.id ))
-            return res.status(401).json({ msg: 'Already liked this post' });
+            return res.status(400).send('Already liked this post');
 
         post.likes.unshift({ user: req.user.id });
         await post.save();
-        
-        return res.json(post.likes);
+
+    
+        return res.json(allPosts);
 
     } catch (error) {
         console.error(error.message);
@@ -143,19 +145,20 @@ router.put('/like/:post_id', authorizer, async (req, res) => {
 router.put('/unlike/:post_id', authorizer, async (req, res) => {
 
     try {
-        
+        const allPosts = await UserPost.find()
+            .populate('user', ['name','email','avatar']);
         const post = await UserPost.findById(req.params.post_id);
         if (!post) return res.status(404).json({ msg: 'Post not found' });
 
 
         // check if post already has a like from this user
-        if (!post.likes.find( like => like.user.toString() === req.user.id ))
+        if ( !post.likes.find( like => like.user.toString() === req.user.id ))
             return res.status(401).json({ msg: 'This user hasn\'t liked this post' });
 
         post.likes = post.likes.filter(like => like.user.toString() !== req.user.id);
         await post.save();
         
-        return res.json(post.likes);
+        return res.json(allPosts);
 
     } catch (error) {
         console.error(error.message);

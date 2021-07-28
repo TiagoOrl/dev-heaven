@@ -1,4 +1,5 @@
-import { GET_ALL_POSTS, GET_FULL_POST, REMOVE_POST, POST_ERROR } from '../actions/types';
+import { GET_ALL_POSTS, GET_FULL_POST, REMOVE_POST, POST_ERROR, 
+            UPDATE_LIKES } from '../actions/types';
 
 
 const initialState = {
@@ -38,6 +39,12 @@ export default function post(state = initialState, action) {
                 ...state,
                 msg: action.payload
             }
+
+        case UPDATE_LIKES:
+            return {
+                ...state,
+                all_posts: action.payload
+            };
 
         default:
             return state;

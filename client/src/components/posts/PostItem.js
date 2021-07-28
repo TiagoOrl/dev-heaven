@@ -1,4 +1,4 @@
-import {getFullPost} from '../../actions/post'
+import {getFullPost, addLike, removeLike} from '../../actions/post'
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
@@ -38,11 +38,11 @@ const PostItem = (props) => {
                 Posted on {' '}
                 <Moment format="DD/MM/YYYY">{props.item.date}</Moment>
             </p>
-            <button type="button" className="btn btn-light">
+            <button onClick={e => props.addLike(props.item._id)} type="button" className="btn btn-light">
               <i className="fas fa-thumbs-up"></i>{' '}
               <span>{props.item.likes.length}</span>
             </button>
-            <button type="button" className="btn btn-light">
+            <button onClick={e => props.removeLike(props.item._id)} type="button" className="btn btn-light">
               <i className="fas fa-thumbs-down"></i>
             </button>
             <Link to={`/full-item`} className="btn btn-primary">
@@ -55,10 +55,12 @@ const PostItem = (props) => {
 }
 
 PostItem.propTypes = {
-    getFullPost: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired,
-    item: PropTypes.object.isRequired
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
+  getFullPost: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -66,4 +68,4 @@ const mapStateToProps = (state) => ({
     profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getFullPost })(PostItem);
+export default connect(mapStateToProps, { getFullPost, addLike, removeLike })(PostItem);
