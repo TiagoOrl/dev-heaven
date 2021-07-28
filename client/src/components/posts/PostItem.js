@@ -1,4 +1,4 @@
-import {getFullPost, addLike, removeLike} from '../../actions/post'
+import {getFullPost, deletePost, addLike, removeLike} from '../../actions/post'
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
@@ -13,6 +13,7 @@ const PostItem = (props) => {
         deleteBtn = 
         <button      
         type="button"
+        onClick={e => {props.deletePost(props.item._id)}}
         className="btn btn-danger">
             <i className="fas fa-times"></i>
         </button>
@@ -58,6 +59,7 @@ PostItem.propTypes = {
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
   getFullPost: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   item: PropTypes.object.isRequired
@@ -68,4 +70,4 @@ const mapStateToProps = (state) => ({
     profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getFullPost, addLike, removeLike })(PostItem);
+export default connect(mapStateToProps, { getFullPost, deletePost, addLike, removeLike })(PostItem);

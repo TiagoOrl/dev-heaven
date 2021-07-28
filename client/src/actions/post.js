@@ -1,6 +1,6 @@
 import { setAlert } from './alert';
 import axios from 'axios';
-import { GET_ALL_POSTS, GET_FULL_POST, REMOVE_POST, 
+import { GET_ALL_POSTS, GET_FULL_POST, DELETE_POST, 
             POST_ERROR, UPDATE_LIKES } from './types';
 
 
@@ -37,6 +37,28 @@ export const getFullPost = (post_id) => async dispatch => {
 
     } catch (error) {
 
+        dispatch({
+            type: POST_ERROR,
+            payload: error
+        })
+    }
+}
+
+
+export const deletePost = (post_id) => async dispatch => {
+     
+    try {
+        const res = await axios.delete(`/api/posts/${post_id}`);
+
+        dispatch({
+            type: DELETE_POST,
+            payload: res.data
+        });
+
+        dispatch(setAlert(res.data, 'success'));
+        dispatch(getAllPosts());
+
+    } catch (error) {
         dispatch({
             type: POST_ERROR,
             payload: error
