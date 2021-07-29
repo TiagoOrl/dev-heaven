@@ -11,15 +11,15 @@ const PostForm = props => {
     });
 
     return (
-        <div class="post-form">
+      <div class="post-form">
         <div class="bg-primary p">
           <h3>Create a new Post</h3>
         </div>
         <form class="form my-1" onSubmit={e => {e.preventDefault(); props.addPost(formData)}}>
             <textarea
                 name="title"
-                cols="30"
-                rows="5"
+                cols="26"
+                rows="1"
                 value={formData.title}
                 onChange={e => setFormData({ ...formData, [e.target.name]: e.target.value })}
                 placeholder="Title Here"

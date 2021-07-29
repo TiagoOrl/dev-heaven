@@ -171,13 +171,18 @@ router.put('/unlike/:post_id', authorizer, async (req, res) => {
 // @desc    Adds a comment to a post by any auth user
 // @access  Private
 router.post('/comment/:post_id', [authorizer, 
-    check('title', 'Title must have at least 5 characters').isLength({min: 5}),
-    check('text', 'Text must have at least 12 characters').isLength({min: 12})
+    check('title', 'Comment must have a title').not().isEmpty(),
+    check('text', 'Comment must have a text').not().isEmpty()
 ],
 async (req, res) => {
 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) 
+        return res.status(400).json({errors: errors.array()});
+
     try {
         const user = await User.findById(req.user.id);
+        if (!user)  return res.status(400).json({msg: 'User not found'});
         const post = await UserPost.findById(req.params.post_id);
         if (!post)  return res.status(400).json({msg: 'Post not found'});
 
@@ -193,7 +198,7 @@ async (req, res) => {
         post.comments.unshift(newComment);
         post.save();
 
-        return res.json(post.comments);
+        return res.send('Comment added with success');
 
     } catch (error) {
         console.error(error.message);
@@ -223,7 +228,7 @@ router.delete('/comment/:post_id/:comment_id', authorizer, async (req, res) => {
         post.comments = post.comments.filter(comment => comment._id.toString() !== req.params.comment_id);
         await post.save();
 
-        res.json(post.comments);
+        return res.json('Comment deleted with success');
 
     } catch (error) {
         console.error(error.message);

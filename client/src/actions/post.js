@@ -166,7 +166,12 @@ export const addComment = (post_id, formData) => async dispatch => {
         dispatch(getFullPost(post_id));
 
     } catch (error) {
+        const errors = error.response.data.errors;
 
+        if (errors){
+            errors.forEach(e => dispatch(setAlert(e.msg, 'danger')));
+        }
+        
         dispatch({
             type: POST_ERROR,
             payload: error

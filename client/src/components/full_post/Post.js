@@ -1,3 +1,4 @@
+import CommentForm from './CommentForm'
 import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
 import React, {useEffect} from 'react'
@@ -21,7 +22,13 @@ const Post = ({
     }, [])
 
     let deleteBtn = <div />;
+    let commentForm = <div>You have to be logged in to comment.</div>;
     let postSection = <Spinner />;
+
+
+    if (auth.token !== null) {
+        commentForm = <CommentForm post_id={full_post._id} />;
+    }
 
     if (full_post !== null && auth.user !== null && full_post.user_id === auth.user._id){
         deleteBtn = 
@@ -68,14 +75,18 @@ const Post = ({
                 
             </div>
             <div>
-                <h3>Comments</h3>
+                <h2>Comments</h2>
                 {full_post.comments.map(item => (<div key={item._id}>
-                    <h5>By: {item.username}</h5>
+                    <h4>By: {item.username}</h4>
+                    <p><b>{item.title}</b></p>
                     <p>{item.text}</p>
                     </div>
                     )
                 )}
             </div>
+                
+            {commentForm}
+            
         </div>
     }
 
