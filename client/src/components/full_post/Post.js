@@ -36,37 +36,46 @@ const Post = ({
     if (full_post !== null) {
         postSection = 
         <div className="post bg-white p-1 my-1">
-          <div>
-            <Link to={`/full-profile/${full_post.user_id}`}>
-              <img
-                className="round-img"
-                src={full_post.avatar}
-                alt=""
-              />
-              <h4>{full_post.name}</h4>
-            </Link>
-          </div>
-          <div>
-            <p className="my-1">
-              {full_post.title}
-            </p>
-            <p className="my-1">
-              {full_post.text}
-            </p>
-             <p className="post-date">
-                Posted on {' '}
-                <Moment format="DD/MM/YYYY">{full_post.date}</Moment>
-            </p>
-            <button onClick={e => { addLike(full_post._id)} } type="button" className="btn btn-light">
-              <i className="fas fa-thumbs-up"></i>{' '}
-              <span>{full_post.likes.length}</span>
-            </button>
-            <button onClick={e => { removeLike(full_post._id)} } type="button" className="btn btn-light">
-              <i className="fas fa-thumbs-down"></i>
-            </button>
-            {deleteBtn}
-            
-          </div>
+            <div>
+                <Link to={`/full-profile/${full_post.user_id}`}>
+                <img
+                    className="round-img"
+                    src={full_post.avatar}
+                    alt=""
+                />
+                <h4>{full_post.name}</h4>
+                </Link>
+            </div>
+            <div>
+                <p className="my-1">
+                {full_post.title}
+                </p>
+                <p className="my-1">
+                {full_post.text}
+                </p>
+                <p className="post-date">
+                    Posted on {' '}
+                    <Moment format="DD/MM/YYYY">{full_post.date}</Moment>
+                </p>
+                <button onClick={e => { addLike(full_post._id)} } type="button" className="btn btn-light">
+                <i className="fas fa-thumbs-up"></i>{' '}
+                <span>{full_post.likes.length}</span>
+                </button>
+                <button onClick={e => { removeLike(full_post._id)} } type="button" className="btn btn-light">
+                <i className="fas fa-thumbs-down"></i>
+                </button>
+                {deleteBtn}
+                
+            </div>
+            <div>
+                <h3>Comments</h3>
+                {full_post.comments.map(item => (<div key={item._id}>
+                    <h5>By: {item.username}</h5>
+                    <p>{item.text}</p>
+                    </div>
+                    )
+                )}
+            </div>
         </div>
     }
 

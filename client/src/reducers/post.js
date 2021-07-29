@@ -1,6 +1,6 @@
 import { GET_ALL_POSTS, GET_FULL_POST, ADD_POST,
              DELETE_POST, POST_ERROR, 
-            UPDATE_LIKES } from '../actions/types';
+            UPDATE_LIKES, ADD_COMMENT, REMOVE_COMMENT } from '../actions/types';
 
 
 const initialState = {
@@ -50,6 +50,18 @@ export default function post(state = initialState, action) {
                 ...state,
                 all_posts: action.payload.res,
                 msg: action.payload.msg
+            };
+
+        case ADD_COMMENT:
+            return {
+                ...state,
+                msg: action.payload
+            };
+
+        case REMOVE_COMMENT:
+            return {
+                ...state,
+                msg: action.payload
             };
 
         default:
