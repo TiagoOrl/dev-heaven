@@ -1,3 +1,4 @@
+import CommentItem from './CommentItem'
 import CommentForm from './CommentForm'
 import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
@@ -26,7 +27,7 @@ const Post = ({
     let postSection = <Spinner />;
 
 
-    if (auth.token !== null) {
+    if (auth.token !== null && full_post !== null) {
         commentForm = <CommentForm post_id={full_post._id} />;
     }
 
@@ -42,51 +43,52 @@ const Post = ({
 
     if (full_post !== null) {
         postSection = 
-        <div className="post bg-white p-1 my-1">
-            <div>
-                <Link to={`/full-profile/${full_post.user_id}`}>
-                <img
-                    className="round-img"
-                    src={full_post.avatar}
-                    alt=""
-                />
-                <h4>{full_post.name}</h4>
-                </Link>
-            </div>
-            <div>
-                <p className="my-1">
-                {full_post.title}
-                </p>
-                <p className="my-1">
-                {full_post.text}
-                </p>
-                <p className="post-date">
-                    Posted on {' '}
-                    <Moment format="DD/MM/YYYY">{full_post.date}</Moment>
-                </p>
-                <button onClick={e => { addLike(full_post._id)} } type="button" className="btn btn-light">
-                <i className="fas fa-thumbs-up"></i>{' '}
-                <span>{full_post.likes.length}</span>
-                </button>
-                <button onClick={e => { removeLike(full_post._id)} } type="button" className="btn btn-light">
-                <i className="fas fa-thumbs-down"></i>
-                </button>
-                {deleteBtn}
-                
-            </div>
-            <div>
-                <h2>Comments</h2>
-                {full_post.comments.map(item => (<div key={item._id}>
-                    <h4>By: {item.username}</h4>
-                    <p><b>{item.title}</b></p>
-                    <p>{item.text}</p>
-                    </div>
-                    )
-                )}
-            </div>
-                
-            {commentForm}
+        
+        <div>
             
+            <div className="post bg-white p-1 my-1">
+                <div>
+                    <Link to={`/full-profile/${full_post.user_id}`}>
+                        <img
+                            className="round-img"
+                            src={full_post.avatar}
+                            alt=""
+                        />
+                        <h4>{full_post.name}</h4>
+                    </Link>
+                </div>
+                <div>
+                    <p className="my-1">
+                    {full_post.title}
+                    </p>
+                    <p className="my-1">
+                    {full_post.text}
+                    </p>
+                    <p className="post-date">
+                        Posted on {' '}
+                        <Moment format="DD/MM/YYYY">{full_post.date}</Moment>
+                    </p>
+                    <button onClick={e => { addLike(full_post._id)} } type="button" className="btn btn-light">
+                    <i className="fas fa-thumbs-up"></i>{' '}
+                    <span>{full_post.likes.length}</span>
+                    </button>
+                    <button onClick={e => { removeLike(full_post._id)} } type="button" className="btn btn-light">
+                    <i className="fas fa-thumbs-down"></i>
+                    </button>
+                    {deleteBtn}
+
+                    <div className="comments">
+                        
+                        <h2>Comments</h2>
+                        {full_post.comments.map(item => (
+                            <CommentItem postId={full_post._id} comment={item} key={item._id} />
+                        )
+                        )}
+                    </div>
+                    {commentForm}
+                </div>
+                
+            </div>
         </div>
     }
 
