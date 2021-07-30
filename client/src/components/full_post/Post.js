@@ -45,8 +45,9 @@ const Post = ({
         postSection = 
         
         <div>
-            
+            <div/>
             <div className="post bg-white p-1 my-1">
+                
                 <div>
                     <Link to={`/full-profile/${full_post.user_id}`}>
                         <img

@@ -463,7 +463,7 @@ button {
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-gap: 2rem;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .post > div:first-child {
@@ -482,7 +482,7 @@ button {
   font-size: 0.8rem;
 }
 
-.post .post-date {
+.post-date {
   color: #aaa;
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
@@ -574,4 +574,7 @@ button {
   .post button {
     padding: 0.3rem 0.4rem;
   }
+
+
+
 }
